@@ -1,0 +1,6 @@
+{
+"auto-detect-format" : true,
+"filenames" : [
+{ "time" : 0, "xyz" : "/Users/yl723/Downloads/pyqt/plot3d/combxyz.bin", "q" : "/Users/yl723/Downloads/pyqt/plot3d/combq.bin" }
+]
+}
