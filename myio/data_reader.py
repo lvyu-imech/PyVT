@@ -13,22 +13,22 @@ def read_input_file(filename):
         # PolyData, StructuredGrid, StructuredPoints, UnstructuredGrid, RectilinearGrid
         reader = vtk.vtkDataSetReader()
         reader.SetFileName(file_name)
-        #reader.ReadAllScalarsOn()
-        #reader.ReadAllVectorsOn()
-        
-        reader.Update()
-        print(reader.GetOutput())
-        
+        reader.ReadAllScalarsOn()
+        reader.ReadAllVectorsOn()
         #reader.ReadAllTensorsOn()
         #reader.ReadAllFieldsOn()
         #reader.ReadAllNormalsOn()
         #reader.ReadAllColorScalarsOn()
+    elif file_name.endswith(".stl"):
 
+        reader = vtk.vtkSTLReader()
+        reader.SetFileName(file_name)
+        
     elif file_name.endswith(".vtu"):  # read XML unstructuredGrid type
         reader = vtk.vtkXMLUnstructuredGridReader()
         reader.SetFileName(file_name)
 
-    elif file_name.endswith(".vts"):  # read XML structuerdGrid type
+    elif file_name.endswith(".vts"):  # read XML structuredGrid type
         reader = vtk.vtkXMLStructuredGridReader()
         reader.SetFileName(file_name)
 
@@ -145,16 +145,41 @@ def read_input_file(filename):
         reader = vtk.vtkPlot3DMetaReader()
         reader.SetFileName(file_name)
         
-    elif file_name.endswich(".cgns"): # read cgns data file
+    elif file_name.endswith(".cgns"): # read cgns data file
+        import sys
+        import os
+        #searchfolder = os.path.join(os.path.abspath(os.curdir), 'cgns')
+        searchfolder = '/Users/yl723/Documents/solver/pyqt/myio/cgns'
+        for dirpath, dirnames, files in os.walk(searchfolder):
+            ifile = ''
+            for ifile in files:
+                if ifile == 'cgns_to_vtk':
+                    break
+            if ifile == 'cgns_to_vtk':
+                break
+            
+        converter = dirpath + '/' + ifile + ' -a ' + filename 
+        os.system(converter)
+        
+        vtkfilename = os.path.abspath(os.curdir) + '/' + 'Zone1.vtk'
+        reader = vtk.vtkDataSetReader()
+        reader.SetFileName(vtkfilename)
+        reader.ReadAllScalarsOn()
+        reader.ReadAllVectorsOn()
 
-        # to be done
-        print('to be done')
-
+        #delete the temp .vtk file
+        #os.system('rm' + ' ' + vtkfilename)
+        
     reader.Update()  # Needed because of GetScalarRange
  
     if file_name.endswith(".p3d"):
         output = reader.GetOutput().GetBlock(0)
     else:
         output = reader.GetOutput()
+
+        if file_name.endswith(".cgns"):
+            #delete the temp .vtk file
+            os.system('rm' + ' ' + vtkfilename)
+
 
     return output

@@ -185,7 +185,7 @@ class popup_widget_4SL(QWidget):
         self.buttonBox.setObjectName("buttonBox")
         self.buttonBox.button(QtWidgets.QDialogButtonBox.Ok).setText("View")
         self.buttonBox.button(QtWidgets.QDialogButtonBox.Cancel).setText("Close")
-        self.buttonBox.button(QtWidgets.QDialogButtonBox.Apply).setText("Export")
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Apply).setText("Import")
 
         self.buttonBox.accepted.connect(self.click_view)
         self.buttonBox.button(QtWidgets.QDialogButtonBox.Apply).clicked.connect(self.click_confirm)

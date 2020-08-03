@@ -31,7 +31,7 @@ class popup_widget_4VF(QDialog):
         self.buttonBox.setObjectName("buttonBox")
         self.buttonBox.button(QtWidgets.QDialogButtonBox.Ok).setText("View")
         self.buttonBox.button(QtWidgets.QDialogButtonBox.Cancel).setText("Close")
-        self.buttonBox.button(QtWidgets.QDialogButtonBox.Apply).setText("Export")
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Apply).setText("Import")
         
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(85, 77, 111, 21))

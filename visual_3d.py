@@ -55,7 +55,7 @@ class AppForm(QMainWindow):
     frame_axis_dialog = None
 
     # editing-active Actors
-    volume_actor = None 
+    volumeActor = None 
     planeActor   = None 
     isoActor     = None 
     streamActor  = None 
@@ -139,6 +139,21 @@ class AppForm(QMainWindow):
         if self.WireframeActor != None:
             actor_list.append(self.WireframeActor)
          
+        if self.volumeActor.GetVisibility():
+            actor_list.append(self.volumeActor)
+
+        if int(self.planeActor.GetProperty().GetOpacity()) != 0:
+            actor_list.append(self.planeActor)
+
+        if int(self.isoActor.GetProperty().GetOpacity()) != 0:
+            actor_list.append(self.isoActor)
+
+        if int(self.streamActor.GetProperty().GetOpacity()) != 0:
+            actor_list.append(self.streamActor)
+
+        if int(self.glyphActor.GetProperty().GetOpacity()) != 0:
+            actor_list.append(self.glyphActor)
+        
         for item in self.module_list:
             actor_list.append(item.actor)
 
@@ -174,11 +189,13 @@ class AppForm(QMainWindow):
         
         # options = QFileDialog.Options()
         # options |= QFileDialog.DontUseNativeDialog
-        self.filename, _ = QFileDialog.getOpenFileName(self, "Open", "", "VTK Files (*.vtu *.vts *.vtk);; \
-                                                                          Tecplot Bin File(*.plt);;       \
-                                                                          Tecplot ASCII File(*.dat);;   \
-                                                                          Plot3D File(*.p3d);;            \
-                                                                          PYGG State File(*.stat);;       \
+        self.filename, _ = QFileDialog.getOpenFileName(self, "Open", "", "VTK Files (*.vtu *.vts *.vtk);;  \
+                                                                          Tecplot Bin File (*.plt);;       \
+                                                                          Tecplot ASCII File (*.dat);;     \
+                                                                          Plot3D File (*.p3d);;            \
+                                                                          PyVt State File (*.stat);;       \
+                                                                          STL File (*.stl);;               \
+                                                                          CGNS File (*.cgns);;             \
                                                                           All Files (*)")
         if len(self.filename)==0:
             return 
@@ -600,8 +617,8 @@ class AppForm(QMainWindow):
         self.defined_scalar_list.append(self.popup_4SC.new_var_name)
 
     def adjust_opacity(self, value):
-        self.volume_actor.GetProperty().SetOpacity(1-float(value)/99.0)
-        self.volume_actor.GetProperty().ShadingOff()
+        self.volumeActor.GetProperty().SetOpacity(1-float(value)/99.0)
+        self.volumeActor.GetProperty().ShadingOff()
 
     def control_cutplane_vis(self):
         if self.cutplane_see.isChecked():
@@ -652,7 +669,7 @@ class AppForm(QMainWindow):
         cutterMapper.SetInputConnection(cutter.GetOutputPort())
         self.planeActor.SetMapper(cutterMapper)
         self.planeActor.GetProperty().SetOpacity(1-float(self.setopacity.value())/99.0)
-        self.volume_actor.SetVisibility(False)
+        self.volumeActor.SetVisibility(False)
 
         self.vtkWidget.GetRenderWindow().Render()
       
@@ -701,7 +718,7 @@ class AppForm(QMainWindow):
         self.isoActor.SetMapper(isoMapper)
         self.isoActor.GetProperty().SetOpacity(1-float(self.setopacity.value())/99.0)
 
-        self.volume_actor.SetVisibility(False) 
+        self.volumeActor.SetVisibility(False) 
        
         self.vtkWidget.GetRenderWindow().Render()
 
@@ -761,7 +778,7 @@ class AppForm(QMainWindow):
         
         self.streamActor.SetMapper(mapStreamLines)
         self.streamActor.GetProperty().SetOpacity(1-float(self.setopacity.value())/99.0)
-        self.volume_actor.SetVisibility(False)
+        self.volumeActor.SetVisibility(False)
  
         self.vtkWidget.GetRenderWindow().Render()
 
@@ -825,7 +842,7 @@ class AppForm(QMainWindow):
         
         self.glyphActor.SetMapper(glyphMapper)
         self.glyphActor.GetProperty().SetOpacity(1-float(self.setopacity.value())/99.0)
-        self.volume_actor.SetVisibility(False)
+        self.volumeActor.SetVisibility(False)
         
         self.vtkWidget.GetRenderWindow().Render()
 
@@ -1139,13 +1156,13 @@ class AppForm(QMainWindow):
 
         self.frame_axes = Scene_Module_FrameAxes()
 
-        self.volume_actor = vtk.vtkActor()
+        self.volumeActor = vtk.vtkActor()
         self.planeActor   = vtk.vtkActor()
         self.isoActor     = vtk.vtkActor()
         self.streamActor  = vtk.vtkActor()
         self.glyphActor   = vtk.vtkActor() 
 
-        self.renderer.AddActor(self.volume_actor)
+        self.renderer.AddActor(self.volumeActor)
         self.renderer.AddActor(self.planeActor  )
         self.renderer.AddActor(self.isoActor    )
         self.renderer.AddActor(self.streamActor )
@@ -1524,7 +1541,7 @@ class AppForm(QMainWindow):
 
         self.vectorfield_select.setCurrentIndex(0)
         self.glyphActor.GetProperty().SetOpacity(0)
-        self.volume_actor.SetVisibility(False)
+        self.volumeActor.SetVisibility(False)
         
         self.vtkWidget.GetRenderWindow().Render()
  
@@ -1536,7 +1553,7 @@ class AppForm(QMainWindow):
         # check if any element is specified
         if self.cutplane_select.currentIndex() != 0: 
             have_listed_elem = True
-            self.volume_actor.SetVisibility(False)
+            self.volumeActor.SetVisibility(False)
            
             index = self.cutplane_select.currentIndex()
             model = self.listed_cutplane_model[index]
@@ -1551,7 +1568,7 @@ class AppForm(QMainWindow):
 
         if self.isosurf_select.currentIndex() != 0:
             have_listed_elem = True
-            self.volume_actor.SetVisibility(False)
+            self.volumeActor.SetVisibility(False)
             
             index = self.isosurf_select.currentIndex()
             model = self.listed_isosurf_model[index]
@@ -1567,7 +1584,7 @@ class AppForm(QMainWindow):
             
         if self.streamline_select.currentIndex() != 0:
             have_listed_elem = True
-            self.volume_actor.SetVisibility(False)
+            self.volumeActor.SetVisibility(False)
             
             index = self.streamline_select.currentIndex()
             model = self.listed_streamline_model[index]
@@ -1582,7 +1599,7 @@ class AppForm(QMainWindow):
             
         if self.vectorfield_select.currentIndex() != 0:
             have_listed_elem = True
-            self.volume_actor.SetVisibility(False)
+            self.volumeActor.SetVisibility(False)
             
             index = self.vectorfield_select.currentIndex()
             models = self.listed_vectorfield_model[index]
@@ -1623,9 +1640,9 @@ class AppForm(QMainWindow):
             volume_mapper.SetInputData(self.output)
 
             # update the Actor
-            self.volume_actor.SetVisibility(True)
-            self.volume_actor.SetMapper(volume_mapper)
-            self.volume_actor.GetProperty().SetOpacity(alpha)
+            self.volumeActor.SetVisibility(True)
+            self.volumeActor.SetMapper(volume_mapper)
+            self.volumeActor.GetProperty().SetOpacity(alpha)
             
         self.vtkWidget.GetRenderWindow().Render()
    

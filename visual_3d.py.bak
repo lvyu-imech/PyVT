@@ -176,9 +176,10 @@ class AppForm(QMainWindow):
         # options |= QFileDialog.DontUseNativeDialog
         self.filename, _ = QFileDialog.getOpenFileName(self, "Open", "", "VTK Files (*.vtu *.vts *.vtk);; \
                                                                           Tecplot Bin File(*.plt);;       \
-                                                                          Tecplot ASCII File(*.dat);;   \
+                                                                          Tecplot ASCII File(*.dat);;     \
                                                                           Plot3D File(*.p3d);;            \
-                                                                          PYGG State File(*.stat);;       \
+                                                                          PyVt State File(*.stat);;       \
+                                                                          STL File(*.stl);;               \
                                                                           All Files (*)")
         if len(self.filename)==0:
             return 

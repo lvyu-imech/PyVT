@@ -217,7 +217,7 @@ class popup_widget_4AX(QDialog):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Define Coordinate Axes"))
         self.checkBox_x.setText(_translate("Dialog", "X "))
         self.checkBox_y.setText(_translate("Dialog", "Y"))
         self.checkBox_z.setText(_translate("Dialog", "Z"))
