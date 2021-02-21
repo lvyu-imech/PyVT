@@ -1,0 +1,10 @@
+include README.md LICENSE MANIFEST.in setup.py requirements.txt
+exclude *.pyc core.* *~ *.pdf *.png *.jpg *.eps *.bmp *.tiff
+recursive-exclude pyvt/__pycache__ *
+
+recursive-exclude pyvt *.pyc
+recursive-include pyvt *.py
+recursive-include pyvt/icons *
+recursive-include pyvt/myio/cgns cgns_to_vtk
+recursive-include pyvt/myio/cgns *.dylib
+recursive-include pyvt/myio/cgns *.os

@@ -1,2 +1,0 @@
-CG_BIN_DIR=/Users/yl723/Documents/solver/pyqt/myio/cgns/CGNS-master/build/bin; export CG_BIN_DIR
-CG_LIB_DIR=/Users/yl723/Documents/solver/pyqt/myio/cgns/CGNS-master/build/share/cgnstools; export CG_LIB_DIR

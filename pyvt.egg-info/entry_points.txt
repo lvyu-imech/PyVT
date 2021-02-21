@@ -1,0 +1,3 @@
+[console_scripts]
+pyvt = pyvt:code_entry
+
