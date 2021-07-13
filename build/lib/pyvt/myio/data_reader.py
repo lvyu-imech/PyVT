@@ -28,10 +28,18 @@ def read_input_file(file_name):
         reader = vtk.vtkXMLUnstructuredGridReader()
         reader.SetFileName(file_name)
 
+    elif filename.endswith(".vtr"):  # read XML RectlinearGrid type
+        reader = vtk.vtkXMLRectilinearGridReader()
+        reader.SetFileName(file_name)
+
     elif filename.endswith(".vts"):  # read XML structuredGrid type
         reader = vtk.vtkXMLStructuredGridReader()
         reader.SetFileName(file_name)
-
+    
+    elif filename.endswith(".vtm"):  # read XML multiblock data type 
+        reader = vtk.vtkXMLMultiBlockDataReader()
+        reader.SetFileName(file_name)
+    
     elif filename.endswith(".plt"):  # read Tecplot data file (binary)
         # built-in reader is not very reliable
         #reader = vtk.vtkTecplotReader()
@@ -179,6 +187,15 @@ def read_input_file(file_name):
         output = reader.GetOutput().GetBlock(0)
     elif filename.endswith(".dat") or filename.endswith(".plt"):
         pass
+    elif filename.endswith(".vtm"):
+        # need to merge all blocks together 
+        reader.Update()
+        combine = vtk.vtkCompositeDataGeometryFilter()
+        combine.SetInputConnection(0,reader.GetOutputPort(0));
+        combine.Update()
+        
+        output = combine.GetOutput()
+
     else:
         reader.Update()  # Needed because of GetScalarRange
         output = reader.GetOutput()

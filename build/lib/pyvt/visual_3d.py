@@ -1,11 +1,12 @@
 import math
 import vtk
 from .vtk_wrapper import *
-from .src.qrangeslider import QRangeSlider
+#from .src.qrangeslider import QRangeSlider
 import sys, os, random
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from .src.qrangeslider import QRangeSlider
 
 from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 from vtk.util import numpy_support as VN
@@ -248,7 +249,8 @@ class AppForm(QMainWindow):
 
     def open_file(self):
         
-        self.filename, _ = QFileDialog.getOpenFileName(self, "Open", "", "VTK Files (*.vtu *.vts *.vtk);;  \
+        self.filename, _ = QFileDialog.getOpenFileName(self, "Open", "", "VTK Files (*.vtu *.vts *vtr *.vtk);;  \
+                                                                          VTK MultiBlock File (*.vtm);;    \
                                                                           Tecplot Bin File (*.plt);;       \
                                                                           Tecplot ASCII File (*.dat);;     \
                                                                           Plot3D File (*.p3d);;            \

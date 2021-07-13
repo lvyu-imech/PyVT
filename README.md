@@ -37,3 +37,8 @@ to add additional search path so that the dyn library can be loaded when cgns_to
 executed
 
 
+## miscellaneous
+issue might incur when install matplotlib with newer-version python; make sure to upgrade
+the pip to the lastest version; 
+I encountered issue with pip version 19.2.3; and resolved this issue with pip version 21.1.1
+

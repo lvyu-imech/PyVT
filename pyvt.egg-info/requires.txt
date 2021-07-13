@@ -1,4 +1,4 @@
+PyQt5<=5.14
+matplotlib
 numpy
 vtk
-PyQt5
-matplotlib

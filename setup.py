@@ -11,7 +11,7 @@ setup(
     license='MIT License',
     python_requires='>=3.7.*', 
     packages=find_packages(),
-    install_requires=["numpy", "vtk", "PyQt5", "matplotlib"],
+    install_requires=["numpy", "vtk", "PyQt5<=5.14", "matplotlib"],
     package_data={'pyvt': ['icons/*']},
     include_package_data=True,
     entry_points={'console_scripts' : ['pyvt = pyvt:code_entry']},

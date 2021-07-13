@@ -1,0 +1,6 @@
+{
+"auto-detect-format" : true,
+"filenames" : [
+{ "time" : 0, "xyz" : "/Users/yulv/Documents/solvers/visualization/pyvt_1.0/data/combxyz.bin", "q" : "/Users/yulv/Documents/solvers/visualization/pyvt_1.0/data/combq.bin" }
+]
+}
