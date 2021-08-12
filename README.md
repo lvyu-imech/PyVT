@@ -4,6 +4,17 @@ PyVT is a open-source light-weight python-based visualization tool built upon VT
 It is designated for visualization and graphic analysis of CFD/fluid-dynamic datasets. 
 It is capable of generating cutplane/streamline/vector/isosurface in a interactive GUI.
 
+## Reference & Citation
+The details of PyVT are documented in the following paper. We appreciate you citing our work. 
+@article{liu2021pyvt,
+  title={PyVT: A python-based open-source software for visualization and graphic analysis of fluid dynamics datasets},
+  author={Liu, Qing and Qiao, Zheng and Lv, Yu},
+  journal={Aerospace Science and Technology},
+  pages={106961},
+  year={2021},
+  publisher={Elsevier}
+}
+
 ## Dependencies:
 0. python3
 1. numpy
@@ -38,7 +49,9 @@ executed
 
 
 ## miscellaneous
-issue might incur when install matplotlib with newer-version python; make sure to upgrade
+1. issue might occur when install matplotlib with newer-version python; make sure to upgrade
 the pip to the lastest version; 
 I encountered issue with pip version 19.2.3; and resolved this issue with pip version 21.1.1
+
+2. issue might occur when loading PyQT on ubuntu since a required package component SIP is installed in a separate package folder. The solution is simply to copy SIP .so lib into the PyQT libs folder 
 
